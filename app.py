@@ -1,23 +1,24 @@
 from flask import Flask, make_response, request, jsonify, abort, session
-from models import db,Car, Owner, User
 from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_restful import Api,Resource
 from werkzeug.exceptions import NotFound
+from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 
 
 app =Flask(__name__)
-bcrypt = Bcrypt(app)
 CORS(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
-migrate = Migrate(app,db)
 app.secret_key=b'\xa8 \xd3t\xf4\x88\x02\x9d'
-db.init_app(app)
+db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
+# db.init_app(app)
+migrate = Migrate(app,db)
 api = Api(app)
-
+from models import db,Car, Owner, User
 
 
 
