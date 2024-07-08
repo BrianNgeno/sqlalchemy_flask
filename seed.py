@@ -16,8 +16,10 @@ with app.app_context():
     db.session.remove()
 
     #seed users
-    user1 = User(user_name="john_doe",_password_hash="@dmin")
-    user2 = User(user_name="jane_doe",_password_hash="@dmin123")
+    user1 = User(user_name="john_doe")
+    user1.password_hash = "@dmin" 
+    user2 = User(user_name="jane_doe")
+    user2.password_hash = "@dmin123"
     
     db.session.add_all([user1, user2])
     db.session.commit()
