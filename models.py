@@ -39,6 +39,7 @@ class User(db.Model,SerializerMixin):
 
 
     def authenticate(self, password):
+        password = password.encode('utf-8')
         return bcrypt.check_password_hash(self._password_hash, password)
 
 
