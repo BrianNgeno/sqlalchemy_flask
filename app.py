@@ -13,13 +13,13 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 app.secret_key=b'\xa8 \xd3t\xf4\x88\x02\x9d'
-db = SQLAlchemy(app)
+# db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
-# db.init_app(app)
-migrate = Migrate(app,db)
+
 api = Api(app)
 from models import db,Car, Owner, User
-
+db.init_app(app)
+migrate = Migrate(app,db)
 
 
 
